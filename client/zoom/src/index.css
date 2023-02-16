@@ -10,6 +10,10 @@
   font: inherit;
 }
 
+body {
+  font-family: 'Zoom', sans-serif;
+}
+
 img,
 picture,
 svg,
@@ -20,4 +24,16 @@ video {
 
 body {
   min-height: 100vh;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 12px;
+  background-color: #ECF2FF;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
 }

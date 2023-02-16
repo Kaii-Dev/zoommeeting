@@ -7,7 +7,7 @@ const Button = ({ ...props }) => {
       <button
         type={type}
         style={{
-          background: "green",
+          background: "#3E54AC",
           color: "white",
           borderRadius: "5px",
           padding: "5px 10px",
@@ -18,7 +18,6 @@ const Button = ({ ...props }) => {
       >
         {buttonName}
       </button>
-      ;
     </>
   );
 };

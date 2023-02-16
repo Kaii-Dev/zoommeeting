@@ -14,7 +14,7 @@ function App() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const updatedFormData = { ...formData };
     for (const key in updatedFormData) {
@@ -24,7 +24,21 @@ function App() {
         .join("");
     }
     setFormData(updatedFormData);
-    console.log(formData);
+    try {
+      const response = await fetch("http://localhost:3000/zoominfo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedFormData),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to submit data");
+      }
+      console.log("Form data submitted successfully");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -39,16 +53,16 @@ function App() {
       }}
       onSubmit={handleSubmit}
     >
-      <h1>Please enter Zoom meeting URL below 👇🏻</h1>
       <div
         style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
-          rowGap: "12px",
+          fontSize: "50px",
+          color: "#537FE7",
+          fontStyle: "bold",
         }}
       >
+        Please enter Zoom meeting info below 👇🏻
+      </div>
+      <div className="input-container">
         <Input
           htmlForValue="apiKey"
           labelName="API Key"
@@ -73,8 +87,8 @@ function App() {
           value={formData.hostId}
           onChildData={(data) => handleInputChange("hostId", data)}
         />
+        <Button type="submit" buttonName="Submit" />
       </div>
-      <Button type="submit" buttonName="Submit" />
     </form>
   );
 }
